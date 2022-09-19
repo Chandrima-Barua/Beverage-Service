@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: beverage-db-frontend
+  labels:
+    app: beverage-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: beverage-frontend
+  template:
+    metadata:
+      labels:
+        app: beverage-frontend
+    spec:
+      containers:
+        - name: beverage
+          image: group3_beverage:latest
+          imagePullPolicy: Never
+          env:
+            - name: DB_HANDLER_URI
+              value: http://dbhandler:9999/v1/
+            - name: SERVER_URI
+              value: http://localhost:8080/
+          ports:
+            - containerPort: 8080
+

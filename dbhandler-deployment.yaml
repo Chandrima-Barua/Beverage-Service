@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-d-backend
+  labels:
+    app: database-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database-backend
+  template:
+    metadata:
+      labels:
+        app: database-backend
+    spec:
+      containers:
+        - name: db
+          image: group3_db:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 9999
